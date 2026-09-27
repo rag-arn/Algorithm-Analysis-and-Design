@@ -154,10 +154,10 @@ void convert (vector<vector<pair<int, int>>> &lst, vector<vector<int>> &e_list) 
     int index = 0;
     for (int i=0; i<V; i++) {
         for (auto it : lst[i]) {
-            e_list[index].push_back(i);
-            e_list[index].push_back(it.first);
-            e_list[index].push_back(it.second);
-            index++;
+            if (i>it.first) {
+                e_list[index] = {i, it.first, it.second};
+                index++;
+            }
         }
     }
 }
@@ -176,9 +176,9 @@ int main() {
     generate(lst2);
     generate(lst3);
 
-    vector<vector<int>> e_list1(2*E);
-    vector<vector<int>> e_list2(2*E);
-    vector<vector<int>> e_list3(2*E);
+    vector<vector<int>> e_list1(E);
+    vector<vector<int>> e_list2(E);
+    vector<vector<int>> e_list3(E);
 
     convert(lst1, e_list1);
     convert(lst2, e_list2);
